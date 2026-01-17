@@ -3,7 +3,11 @@ import cors from 'cors';
 import TinyURL from 'tinyurl-api'; // notice the capital T
 
 const app = express();
-app.use(cors());
+// Configure CORS
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 
 // Health check
@@ -11,7 +15,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'URL Shortener API is running' });
 });
 
-const allowedOrigins = ['http://localhost:3000', 'https://example.com'];
+const allowedOrigins = ['http://localhost:3000', 'https://urlshorterabhaya.vercel.app'];
 
 // POST endpoint
 app.post('/shorten', async (req, res) => {
